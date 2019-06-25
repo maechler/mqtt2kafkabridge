@@ -77,12 +77,12 @@ services:
       - zookeeper
     restart: always
     ports:
-      ALLOW_PLAINTEXT_LISTENER: 'yes'
-      # see https://rmoff.net/2018/08/02/kafka
       - 9092:9092
       - 29092:29092
     environment:
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181-listeners-explained/
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: 'yes'
+      # see https://rmoff.net/2018/08/02/kafka-listeners-explained/
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_LISTENERS: PLAINTEXT://:9092,PLAINTEXT_HOST://:29092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
