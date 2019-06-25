@@ -26,14 +26,14 @@ public class Mqtt2KafkaBridge implements MqttCallbackExtended {
         var mqttBrokerHost = Optional.ofNullable(System.getenv("MQTT_BROKER_HOST")).orElse("localhost:1883");
         var mqttBrokerUser = Optional.ofNullable(System.getenv("MQTT_BROKER_USER")).orElse("");
         var mqttBrokerPassword = Optional.ofNullable(System.getenv("MQTT_BROKER_PASSWORD")).orElse("");
-        var mqttBrokerAutomaticReconnect = Boolean.parseBoolean(Optional.ofNullable(System.getenv("MQTT_BROKER_AUTOMATIC_RECONNECT")).orElse("true"));
+        var mqttAutomaticReconnect = Boolean.parseBoolean(Optional.ofNullable(System.getenv("MQTT_AUTOMATIC_RECONNECT")).orElse("true"));
         mqttTopicFilter = Optional.ofNullable(System.getenv("MQTT_TOPIC_FILTER")).orElse("#");
         mqttTopicSeparator = Optional.ofNullable(System.getenv("MQTT_TOPIC_SEPARATOR")).orElse("/");
         kafkaTopicSeparator = Optional.ofNullable(System.getenv("KAFKA_TOPIC_SEPARATOR")).orElse(".");
 
         logger.info(
-            "Configuration values: \n CLIENT_ID={} \n KAFKA_HOST={} \n KAFKA_TOPIC_SEPARATOR={} \n MQTT_BROKER_HOST={} \n MQTT_BROKER_USER={} \n MQTT_BROKER_AUTOMATIC_RECONNECT={} \n MQTT_TOPIC_SEPARATOR={} \n MQTT_TOPIC_FILTER={}",
-                clientId, kafkaHost, kafkaTopicSeparator, mqttBrokerHost, mqttBrokerUser, mqttBrokerAutomaticReconnect, mqttTopicSeparator, mqttTopicFilter
+            "Configuration values: \n CLIENT_ID={} \n KAFKA_HOST={} \n KAFKA_TOPIC_SEPARATOR={} \n MQTT_BROKER_HOST={} \n MQTT_BROKER_USER={} \n MQTT_AUTOMATIC_RECONNECT={} \n MQTT_TOPIC_SEPARATOR={} \n MQTT_TOPIC_FILTER={}",
+                clientId, kafkaHost, kafkaTopicSeparator, mqttBrokerHost, mqttBrokerUser, mqttAutomaticReconnect, mqttTopicSeparator, mqttTopicFilter
         );
 
         kafkaProducerProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaHost);
@@ -50,7 +50,7 @@ public class Mqtt2KafkaBridge implements MqttCallbackExtended {
 
             mqttConnectOptions.setUserName(mqttBrokerUser);
             mqttConnectOptions.setPassword(mqttBrokerPassword.toCharArray());
-            mqttConnectOptions.setAutomaticReconnect(mqttBrokerAutomaticReconnect);
+            mqttConnectOptions.setAutomaticReconnect(mqttAutomaticReconnect);
 
             mqttClient.setCallback(this);
             mqttClient.connect(mqttConnectOptions);

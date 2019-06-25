@@ -13,7 +13,7 @@ All it does is reading messages from an MQTT broker, replacing topic separators 
 | MQTT_BROKER_HOST | `localhost:1883` | Host and port of your MQTT broker. |
 | MQTT_BROKER_USER |  | Username used to connect to MQTT broker. |
 | MQTT_BROKER_PASSWORD |  | Password used to connect to MQTT broker. |
-| MQTT_BROKER_AUTOMATIC_RECONNECT | `true` | Whether or not the MQTT broker should reconnect automatically after connection is lost. |
+| MQTT_AUTOMATIC_RECONNECT | `true` | Whether or not the MQTT client should reconnect automatically after connection to broker is lost. |
 | MQTT_TOPIC_FILTER | `#` | The MQTT topic filter that we subscribe to, by default all messages. |
 | MQTT_TOPIC_SEPARATOR | `/` | The topic separator used for MQTT topics, it is replaced by `KAFKA_TOPIC_SEPARATOR`. |
 
