@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+echo "Pushing docker tag latest"
+
+docker push marmaechler/mqtt2kafkabridge:latest
+
+if [ "$1" ]; then
+  echo "Pushing docker tag $1"
+
+  docker tag marmaechler/mqtt2kafkabridge:latest "marmaechler/mqtt2kafkabridge:$1"
+  docker push "marmaechler/mqtt2kafkabridge:$1"
+fi

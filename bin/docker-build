@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+./gradlew build
+
+docker build --no-cache -t marmaechler/mqtt2kafkabridge .
